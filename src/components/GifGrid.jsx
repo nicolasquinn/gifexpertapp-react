@@ -1,5 +1,9 @@
+import { getGifs } from "../helpers/getGifs";
+
 // Se recibe de manera implícita el key.
 export const GifGrid = ({ category }) => {
+
+  getGifs(category);
 
   return (
     <>

@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { AddCategory } from "./AddCategory";
-import { GifGrid } from "./GifGrid";
+import { AddCategory } from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
 
 export const GifExpertApp = () => {
 
-    const [ categories, setCategories ] = useState([ 'Better Call Saul', 'Breaking Bad' ]);
+    const [ categories, setCategories ] = useState([ 'Better Call Saul' ]);
 
     const onAddCategory = ( newCategory ) => {
 
