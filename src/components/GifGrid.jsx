@@ -1,18 +1,10 @@
-import { useEffect, useState } from "react";
-import { getGifs } from "../helpers/getGifs";
 import { GifItem } from "./GifItem";
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
 // Se recibe de manera implícita el key.
 export const GifGrid = ({ category }) => {
   
-  const [ images, setImages ] = useState([]);
-
-  useEffect( () => {
-
-    getGifs(category)
-      .then( (imgs) => setImages(imgs) );
-
-  }, [])
+  const { images, isLoading } = useFetchGifs(category);
 
   return (
     <> 
