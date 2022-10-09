@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGifs } from "../helpers/getGifs";
+import { GifItem } from "./GifItem";
 
 // Se recibe de manera implícita el key.
 export const GifGrid = ({ category }) => {
@@ -13,16 +14,22 @@ export const GifGrid = ({ category }) => {
 
   }, [])
 
-  return ( 
-    <>
+  return (
+    <> 
+    
       <h3>{ category }</h3>
-      <ol>
+
+      <div className="card-grid">
         {
-          images.map( ({ id, title }) => (
-            <li key={ id }>{ title }</li>
+          images.map( ( img ) => (
+            <GifItem 
+              key={ img.id }
+              { ...img }
+            />
           ))
         }
-      </ol>
+      </div>
+
     </>
   )
 }
