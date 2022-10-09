@@ -4,22 +4,25 @@ import { getGifs } from "../helpers/getGifs";
 // Se recibe de manera implícita el key.
 export const GifGrid = ({ category }) => {
   
-  const [ counter, setCounter ] = useState(10);
-
-  const handlerAdd = () => {
-    setCounter( counter + 1 );
-  }
+  const [ images, setImages ] = useState([]);
 
   useEffect( () => {
-    getGifs(category);
+
+    getGifs(category)
+      .then( (imgs) => setImages(imgs) );
+
   }, [])
 
-  return (
+  return ( 
     <>
-        <h3>{ category }</h3>
-        <p>La imagen</p>
-        <p> { counter } </p>
-        <button onClick={ handlerAdd }>+1</button>
+      <h3>{ category }</h3>
+      <ol>
+        {
+          images.map( ({ id, title }) => (
+            <li key={ id }>{ title }</li>
+          ))
+        }
+      </ol>
     </>
   )
 }
