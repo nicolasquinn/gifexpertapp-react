@@ -17,7 +17,8 @@ describe('Testing AddCategory component', () => {
 
     test('Should call onAddCategory function if input has text', () => {
 
-        render( <AddCategory onAddCategory={ () => {} } /> );
+        const onAddCategory = jest.fn(); // mock
+        render( <AddCategory onAddCategory={ onAddCategory } /> );
         
         const txtInput = screen.getByRole('textbox');
         const form = screen.getByRole('form'); // aria-label in component for working.
@@ -26,8 +27,26 @@ describe('Testing AddCategory component', () => {
         fireEvent.submit( form );
 
         expect( txtInput.value ).toBe('');
-        screen.debug();
+        expect( onAddCategory ).toHaveBeenCalled();
+        expect( onAddCategory ).toHaveBeenCalledTimes(1);
+        expect( onAddCategory ).toHaveBeenCalledWith( inputValue.trim() );
 
+
+    });
+
+    test('Should not call onAddCategory function if input is empty', () => {
+
+        const onAddCategory = jest.fn();
+        render( <AddCategory onAddCategory={ onAddCategory } /> );
+
+        const txtInput = screen.getByRole('textbox');
+        const form = screen.getByRole('form');
+
+        fireEvent.input( txtInput, { target: { value: 'a' } } );
+        fireEvent.submit( form );
+
+        expect( txtInput.value ).toBe('a');
+        expect( onAddCategory ).not.toHaveBeenCalled();
 
     });
 
